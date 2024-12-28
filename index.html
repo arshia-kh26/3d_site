@@ -14,7 +14,6 @@
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
@@ -26,16 +25,11 @@
             scene.add(gltf.scene);
         });
 
-        const ambientLight = new THREE.AmbientLight(0x404040, 1);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
         scene.add(ambientLight);
 
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-        directionalLight.position.set(5, 5, 5).normalize();
-        scene.add(directionalLight);
-
-        const pointLight = new THREE.PointLight(0xff0000, 1, 100);
-        pointLight.position.set(0, 2, 0);
-        scene.add(pointLight);
+        const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x404040, 0.6);
+        scene.add(hemisphereLight);
 
         const controls = new THREE.OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
